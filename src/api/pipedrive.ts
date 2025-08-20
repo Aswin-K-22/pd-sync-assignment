@@ -82,12 +82,10 @@ export const createPerson = async (payload: PipedrivePersonPayload): Promise<Pip
  * @throws Error if the API request fails.
  */
 export const updatePerson = async (id: number, payload: PipedrivePersonPayload): Promise<PipedrivePerson> => {
-  console.log('Sending update payload:', JSON.stringify(payload, null, 2));
   return retryRequest(async () => {
     const response = await axios.put(`${baseUrl}/persons/${id}`, payload, {
       params: { api_token: apiKey },
     });
-    console.log('Update response:', JSON.stringify(response.data.data, null, 2));
     if (!response.data?.data) {
       throw new Error('Invalid response from Pipedrive API');
     }
